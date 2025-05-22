@@ -871,7 +871,7 @@
         <div class="nav-container">
             <a href="#" class="logo">
                 <i class="fas fa-city"></i>
-                Vespucci RP
+                Vespucci
             </a>
             <nav>
                 <ul class="nav-menu" id="navMenu">
@@ -1082,7 +1082,7 @@
                         </div>
                         <div class="rule-item">
                             <div class="rule-number">Regla #3</div>
-                            <div class="rule-text">No hacer publicidad de otros servidores, páginas web, redes sociales o servicios no relacionados con Vespucci RP.</div>
+                            <div class="rule-text">No hacer publicidad de otros servidores, páginas web, redes sociales o servicios no relacionados con Vespucci Roleplay.</div>
                         </div>
                     </div>
 
@@ -1313,7 +1313,7 @@
                     <div class="stats-container">
                         <div class="stat-card">
                             <div class="stat-icon"><i class="fas fa-users"></i></div>
-                            <div class="stat-number">850</div>
+                            <div class="stat-number">+50</div>
                             <div class="stat-label">Miembros en Discord</div>
                         </div>
                         <div class="stat-card">
@@ -1323,7 +1323,7 @@
                         </div>
                         <div class="stat-card">
                             <div class="stat-icon"><i class="fas fa-microphone"></i></div>
-                            <div class="stat-number">45</div>
+                            <div class="stat-number">+3</div>
                             <div class="stat-label">En Canales de Voz</div>
                         </div>
                         <div class="stat-card">
@@ -1599,135 +1599,142 @@
         });
     </script>
 </body>
-</html> Sample forum data
-        const forumData = {
-            announcements: {
-                title: "📢 Anuncios Oficiales",
+</html> 
+
+    <script>
+    const forumData = {
+    announcements: {
+        title: "📢 Anuncios Oficiales",
+        author: "Admin",
+        date: "Hace 2 horas",
+        views: 150,
+        messages: [
+            {
                 author: "Admin",
-                date: "Hace 2 horas",
-                views: 150,
-                messages: [
-                    {
-                        author: "Admin",
-                        avatar: "A",
-                        time: "Hace 2h",
-                        content: "¡Bienvenidos a la nueva actualización de Vespucci Roleplay! Hemos implementado nuevas características y mejoras significativas."
-                    },
-                    {
-                        author: "Moderador",
-                        avatar: "M",
-                        time: "Hace 1h",
-                        content: "Recordad leer las nuevas normas actualizadas. Hemos añadido algunas reglas importantes sobre el roleplay."
-                    }
-                ]
+                avatar: "A",
+                time: "Hace 2h",
+                content: "¡Bienvenidos a la nueva actualización de Vespucci Roleplay! Hemos implementado nuevas características."
             },
-            general: {
-                title: "💬 Charla General",
-                author: "PlayerOne",
-                date: "Hace 30 minutos",
-                views: 89,
-                messages: [
-                    {
-                        author: "PlayerOne",
-                        avatar: "P",
-                        time: "Hace 30m",
-                        content: "¿Alguien sabe dónde puedo conseguir un trabajo como mecánico en el servidor?"
-                    },
-                    {
-                        author: "MechanicPro",
-                        avatar: "M",
-                        time: "Hace 25m",
-                        content: "Ve al taller de Burton, allí están reclutando. ¡Buena suerte!"
-                    },
-                    {
-                        author: "PlayerOne",
-                        avatar: "P",
-                        time: "Hace 20m",
-                        content: "¡Gracias por la información! Me dirijo para allá ahora mismo."
-                    }
-                ]
-            },
-            marketplace: {
-                title: "🏪 Mercado",
-                author: "CarDealer",
-                date: "Hace 1 hora",
-                views: 234,
-                messages: [
-                    {
-                        author: "CarDealer",
-                        avatar: "C",
-                        time: "Hace 1h",
-                        content: "Vendo Infernus modificado, color rojo, precio: $250,000. Contactar por MP."
-                    },
-                    {
-                        author: "RichPlayer",
-                        avatar: "R",
-                        time: "Hace 45m",
-                        content: "Me interesa el Infernus. ¿Qué modificaciones tiene exactamente?"
-                    }
-                ]
-            },
-            support: {
-                title: "🆘 Soporte Técnico",
-                author: "TechUser",
-                date: "Hace 3 horas",
-                views: 45,
-                messages: [
-                    {
-                        author: "TechUser",
-                        avatar: "T",
-                        time: "Hace 3h",
-                        content: "Tengo problemas para conectarme al servidor, me aparece 'connection failed'."
-                    },
-                    {
-                        author: "Admin",
-                        avatar: "A",
-                        time: "Hace 2h",
-                        content: "Hola, verifica que tengas la IP correcta: vespucci-rp.com:7777. Si persiste, contacta por Discord."
-                    }
-                ]
-            },
-            events: {
-                title: "🎉 Eventos",
-                author: "EventManager",
-                date: "Hace 4 horas",
-                views: 178,
-                messages: [
-                    {
-                        author: "EventManager",
-                        avatar: "E",
-                        time: "Hace 4h",
-                        content: "¡Este sábado gran evento de carreras! Premios en efectivo para los 3 primeros lugares."
-                    },
-                    {
-                        author: "RacerGirl",
-                        avatar: "R",
-                        time: "Hace 3h",
-                        content: "¡Genial! ¿A qué hora será el evento? No me lo quiero perder."
-                    }
-                ]
-            },
-            jobs: {
-                title: "💼 Trabajos",
-                author: "PoliceChief",
-                date: "Hace 6 horas",
-                views: 92,
-                messages: [
-                    {
-                        author: "PoliceChief",
-                        avatar: "P",
-                        time: "Hace 6h",
-                        content: "La LSPD está reclutando nuevos oficiales. Requisitos: nivel 5+, buen roleplay, sin antecedentes."
-                    },
-                    {
-                        author: "NewbieCop",
-                        avatar: "N",
-                        time: "Hace 5h",
-                        content: "¿Hay algún proceso de selección específico o puedo aplicar directamente?"
-                    }
-                ]
+            {
+                author: "Moderador",
+                avatar: "M",
+                time: "Hace 1h",
+                content: "Recordad leer las nuevas normas actualizadas. Hemos añadido algunas reglas importantes sobre el roleplay."
             }
-        };
+        ]
+    },
+    general: {
+        title: "💬 Charla General",
+        author: "PlayerOne",
+        date: "Hace 30 minutos",
+        views: 89,
+        messages: [
+            {
+                author: "PlayerOne",
+                avatar: "P",
+                time: "Hace 30m",
+                content: "¿Alguien sabe dónde puedo conseguir un trabajo como mecánico en el servidor?"
+            },
+            {
+                author: "MechanicPro",
+                avatar: "M",
+                time: "Hace 25m",
+                content: "Ve al taller de Burton, allí están reclutando. ¡Buena suerte!"
+            },
+            {
+                author: "PlayerOne",
+                avatar: "P",
+                time: "Hace 20m",
+                content: "¡Gracias por la información! Me dirijo para allá ahora mismo."
+            }
+        ]
+    },
+    marketplace: {
+        title: "🏪 Mercado",
+        author: "CarDealer",
+        date: "Hace 1 hora",
+        views: 234,
+        messages: [
+            {
+                author: "CarDealer",
+                avatar: "C",
+                time: "Hace 1h",
+                content: "Vendo Infernus modificado, color rojo, precio: $250,000. Contactar por MP."
+            },
+            {
+                author: "RichPlayer",
+                avatar: "R",
+                time: "Hace 45m",
+                content: "Me interesa el Infernus. ¿Qué modificaciones tiene exactamente?"
+            }
+        ]
+    },
+    support: {
+        title: "🛠 Soporte Técnico",
+        author: "TechUser",
+        date: "Hace 3 horas",
+        views: 45,
+        messages: [
+            {
+                author: "TechUser",
+                avatar: "T",
+                time: "Hace 3h",
+                content: "Tengo problemas para conectarme al servidor, me aparece 'connection failed'."
+            },
+            {
+                author: "Admin",
+                avatar: "A",
+                time: "Hace 2h",
+                content: "Hola, verifica que tengas la IP correcta: vespucci-rp.com:7777. Si persiste, contacta por Discord."
+            }
+        ]
+    },
+    events: {
+        title: "🎉 Eventos",
+        author: "EventManager",
+        date: "Hace 4 horas",
+        views: 178,
+        messages: [
+            {
+                author: "EventManager",
+                avatar: "E",
+                time: "Hace 4h",
+                content: "¡Este sábado gran evento de carreras! Premios en efectivo para los 3 primeros lugares."
+            },
+            {
+                author: "RacerGirl",
+                avatar: "R",
+                time: "Hace 3h",
+                content: "¡Genial! ¿A qué hora será el evento? No me lo quiero perder."
+            }
+        ]
+    },
+    jobs: {
+        title: "💼 Trabajos",
+        author: "PoliceChief",
+        date: "Hace 6 horas",
+        views: 92,
+        messages: [
+            {
+                author: "PoliceChief",
+                avatar: "P",
+                time: "Hace 6h",
+                content: "La LSPD está reclutando nuevos oficiales. Requisitos: nivel 5+, buen roleplay, sin antecedentes."
+            },
+            {
+                author: "NewbieCop",
+                avatar: "N",
+                time: "Hace 5h",
+                content: "¿Hay algún proceso de selección específico o puedo aplicar directamente?"
+            }
+        ]
+    }
+};
+</script>
+</body>
+</html> 
+
+    <script>
 
         // Navigation functions
         function showPage(pageId) {
@@ -1884,5 +1891,4 @@
         document.addEventListener('DOMContentLoaded', function() {
             showPage('home');
         });
-
-        //
+</script>
