@@ -2,6 +2,8 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <link rel="shortcut icon" href="des/logoweb.png" type="image/png">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SampProyect | Rol en español</title>
     <style>
@@ -370,13 +372,13 @@
             newsItems: [ /* ... (igual que antes) ... */ ],
             forumCategories: [ /* ... (igual que antes) ... */ ],
             sampleThreadMessages: { /* ... (igual que antes) ... */ },
-            socialLinks: { discord: "https://discord.gg/TU_INVITACION", forum: "#page-foro", youtube: "https://youtube.com/TU_CANAL", twitter: "https://twitter.com/TU_PERFIL" }
+            socialLinks: { discord: "https://discord.gg/https://discord.gg/su8TUSfwHQ", forum: "#page-foro", youtube: "https://youtube.com/vespucci-rp", twitter: "https://twitter.com/TU_PERFIL" }
         };
          // (Copia aquí el contenido de siteConfig.newsItems, forumCategories, y sampleThreadMessages de la respuesta anterior si es necesario, para brevedad lo omito aquí)
         siteConfig.newsItems = [
             { id: "news-1", title: "Sistema de Desconocidos", date: "PRÓXIMAMENTE", summary: "Conoce gente...", image: "des/crew.jpeg", largeImage: "des/crew.jpeg", fullText: "Texto completo...", detailButtons: [{ label: "Discutir en Foro", action: "navigateToForumCategory('sugerencias')" }], exampleComments: [] },
             { id: "news-2", title: "Sistema de Logros", date: "PRÓXIMAMENTE", summary: "Gana descubriendo...", image: "des/logros.png", largeImage: "des/logros.png", fullText: "Texto completo...", detailButtons: [], exampleComments: [] },
-            { id: "news-3", title: "Nuevas Normativas", date: "15 MAY, 2025", summary: "Actualizamos normativas...", image: "des/SONY.png", largeImage: "des/SONY.png", fullText: "Texto completo...", detailButtons: [ { label: "Ir a Normas", action: "switchToPageById('page-normas')" } ], exampleComments: [] }
+            { id: "news-3", title: "Nuevas Normativas", date: "22 MAY, 2025", summary: "Actualizamos normativas...", image: "des/sony.png", largeImage: "des/reglasnormativas.png", fullText: "Texto completo...", detailButtons: [ { label: "Ir a Normas", action: "switchToPageById('page-normas')" } ], exampleComments: [] }
         ];
         siteConfig.forumCategories = [
             { id: "anuncios-oficiales", name: "Anuncios Oficiales", description: "Novedades importantes.", threads: [{ id: "thread-an-1", title: "Mantenimiento 25 Mayo", author: "Admin", replies: 2, lastPost: "Hace 5 min" }]},
@@ -576,7 +578,7 @@
         if (newsGrid && siteConfig.newsItems && siteConfig.newsItems.length > 0) {
             newsGrid.innerHTML = ''; 
             siteConfig.newsItems.forEach(item => {
-                const newsCardHTML = `<article class="news-card" data-news-id="${item.id}"><div class="news-card-image"><img src="${item.image}" alt="${item.title}"></div><div class="news-card-content"><h3>${item.title}</h3><small>Publicado: ${item.date}</small><p>${item.summary}</p><button type="button" class="read-more-btn">Leer Más »</button></div></article>`;
+                const newsCardHTML = `<article class="news-card" data-news-id="${item.id}"><div class="news-card-image"><img src="${item.image}" alt="${item.title}"></div><div class="news-card-content"><h3>${item.title}</h3><small>Fecha: ${item.date}</small><p>${item.summary}</p><button type="button" class="read-more-btn">Leer Más »</button></div></article>`;
                 newsGrid.insertAdjacentHTML('beforeend', newsCardHTML);
             });
             newsGrid.querySelectorAll('.read-more-btn').forEach(btn => btn.addEventListener('click', (e) => showNewsDetail(e.target.closest('.news-card').dataset.newsId)));
