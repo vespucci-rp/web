@@ -2,12 +2,10 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <link rel="shortcut icon" href="des/logoweb.png" type="image/png">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SampProyect | Rol en español</title>
+    <title>Vespucci Roleplay - Servidor SAMP</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* --- Variables de Color y Fuentes --- */
         :root {
             --color-bg: #121416;
             --color-contrast: #191B1F;
@@ -17,647 +15,1874 @@
             --color-yellow: #FCCF3A;
             --color-text: #E0E7EF;
             --color-text-muted: #9DA5B0;
-            --font-primary: 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            --font-primary: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             --transition-speed: 0.3s;
-            --animation-duration: 0.5s; 
+            --animation-duration: 0.5s;
         }
 
-        /* --- Reset Básico y Estilos Globales --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: var(--font-primary);
             background-color: var(--color-bg);
             color: var(--color-text);
-            line-height: 1.7;
-            font-size: 16px;
+            line-height: 1.6;
             overflow-x: hidden;
-            opacity: 0;
-            animation: fadeInPage 0.8s ease-out forwards;
         }
-        @keyframes fadeInPage { to { opacity: 1; } }
-        a { color: var(--color-blue); text-decoration: none; transition: color var(--transition-speed) ease; }
-        a:hover { color: var(--color-green); }
-        img { max-width: 100%; height: auto; display: block; }
-        .container { width: 90%; max-width: 1200px; margin: 0 auto; padding: 0 15px; }
-        h1, h2, h3, h4, h5, h6 { font-weight: 600; line-height: 1.3; color: var(--color-text); }
-        h1 { font-size: 2.8em; margin-bottom: 0.5em; }
-        h2 { font-size: 2.2em; margin-bottom: 1em; text-align: center; color: var(--color-blue); }
-        h2::after { content: ''; display: block; width: 80px; height: 4px; background-color: var(--color-green); margin: 15px auto 0; border-radius: 2px; }
-        h3 { font-size: 1.5em; margin-bottom: 0.7em; color: var(--color-green); }
-        button, .button-style {
-            background: var(--color-blue); color: var(--color-bg); border: none; padding: 10px 20px; 
-            font-weight: bold; cursor: pointer; border-radius: 5px;
-            transition: all var(--transition-speed) ease;
-            display: inline-block; text-align: center;
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--color-contrast) 0%, var(--color-contrast-light) 100%);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+            border-bottom: 2px solid var(--color-blue);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
-        button:hover, .button-style:hover { background: var(--color-green); transform: translateY(-2px); }
 
-
-        /* --- Barra de Navegación --- */
-        header { background-color: var(--color-contrast); padding: 15px 0; border-bottom: 3px solid var(--color-blue); position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
-        nav { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
-        nav .logo { font-size: 1.9em; font-weight: 700; color: var(--color-text); text-transform: uppercase; letter-spacing: 1px; }
-        nav .logo span { color: var(--color-blue); }
-        nav ul { list-style: none; display: flex; align-items: center; flex-wrap: wrap; }
-        nav ul li { margin-left: 20px; position: relative; /* Para el menú desplegable */ }
-        nav ul li a, nav ul li button.nav-button { color: var(--color-text-muted); font-weight: 500; padding: 10px 15px; border-radius: 5px; transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease, transform 0.2s ease; display: inline-block; font-size: 0.95em; background: none; border: none; cursor: pointer; }
-        nav ul li a:hover, nav ul li button.nav-button:hover, nav ul li a.active-link { background-color: var(--color-contrast-light); color: var(--color-text); transform: translateY(-2px); }
-        
-        /* Estilos para el botón de menú de usuario */
-        #user-menu-button {
-            display: flex; align-items: center; gap: 8px;
-            padding: 8px 12px; border-radius: 5px; cursor: pointer;
-            transition: background-color var(--transition-speed);
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
         }
-        #user-menu-button:hover { background-color: var(--color-contrast-light); }
-        #user-icon-display { font-size: 1.2em; color: var(--color-text); }
-        #user-info { color: var(--color-green); font-weight: bold; }
-        #dropdown-arrow { font-size: 0.7em; color: var(--color-text-muted); margin-left: 5px; transition: transform 0.2s; }
-        #user-menu-button.open #dropdown-arrow { transform: rotate(180deg); }
 
-        /* Menú Desplegable de Usuario */
-        .user-dropdown-menu {
-            display: none; /* Oculto por defecto */
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--color-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo i {
+            font-size: 2.2rem;
+            background: linear-gradient(45deg, var(--color-blue), var(--color-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 0.5rem;
+        }
+
+        .nav-menu button {
+            background: none;
+            border: none;
+            color: var(--color-text);
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+            font-family: var(--font-primary);
+        }
+
+        .nav-menu button:hover,
+        .nav-menu button.active {
+            background: linear-gradient(45deg, var(--color-blue), var(--color-green));
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(29, 145, 247, 0.3);
+        }
+
+        .nav-menu button i {
+            font-size: 1.1rem;
+        }
+
+        /* Mobile menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--color-text);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Content Container */
+        .content-container {
+            margin-top: 100px;
+            min-height: calc(100vh - 100px);
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn var(--animation-duration) ease-in;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Home Page */
+        .hero {
+            background: 
+                linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+                radial-gradient(circle at 50% 50%, var(--color-blue)20, transparent 50%),
+                linear-gradient(45deg, var(--color-bg) 0%, var(--color-contrast) 100%);
+            min-height: calc(100vh - 100px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
             position: absolute;
-            top: 100%; /* Debajo del botón */
+            top: 0;
+            left: 0;
             right: 0;
-            background-color: var(--color-contrast);
-            border: 1px solid var(--color-contrast-light);
-            border-radius: 5px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            z-index: 1001;
-            min-width: 200px;
-            padding: 5px 0;
-            animation: fadeInDropdown 0.2s ease-out;
+            bottom: 0;
+            background: url('/api/placeholder/1920/1080') center/cover;
+            opacity: 0.1;
+            z-index: -1;
         }
-        @keyframes fadeInDropdown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-        .user-dropdown-menu.active { display: block; }
-        .user-dropdown-menu ul { list-style: none; padding: 0; margin: 0; width: 100%; flex-direction: column; }
-        .user-dropdown-menu ul li a, .user-dropdown-menu ul li button {
-            display: block; width: 100%; text-align: left;
-            padding: 10px 15px;
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 2;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--color-blue), var(--color-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(29, 145, 247, 0.3);
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.5rem;
             color: var(--color-text-muted);
-            font-weight: 500; font-size: 0.9em;
-            background: none; border: none; cursor: pointer;
-            transition: background-color var(--transition-speed), color var(--transition-speed);
+            margin-bottom: 2rem;
         }
-        .user-dropdown-menu ul li a:hover, .user-dropdown-menu ul li button:hover {
-            background-color: var(--color-contrast-light);
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--color-text-muted);
+            margin-bottom: 3rem;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, var(--color-blue), var(--color-green));
+            color: white;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all var(--transition-speed);
+            box-shadow: 0 4px 20px rgba(29, 145, 247, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 30px rgba(29, 145, 247, 0.6);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            border: 2px solid var(--color-blue);
+            color: var(--color-blue);
+        }
+
+        .cta-button.secondary:hover {
+            background: var(--color-blue);
+            color: white;
+        }
+
+        /* Stats Section */
+        .stats {
+            background: linear-gradient(135deg, var(--color-contrast) 0%, var(--color-contrast-light) 100%);
+            padding: 4rem 0;
+            margin: 4rem 0;
+            border-radius: 20px;
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 0 2rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2.5rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            transition: all var(--transition-speed);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(29, 145, 247, 0.2);
+        }
+
+        .stat-icon {
+            font-size: 3rem;
+            color: var(--color-blue);
+            margin-bottom: 1rem;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--color-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--color-text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Forum Page */
+        .forum-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .forum-header {
+            background: linear-gradient(135deg, var(--color-contrast), var(--color-contrast-light));
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .forum-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--color-blue);
+        }
+
+        .forum-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .forum-category {
+            background: var(--color-contrast);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border-left: 4px solid var(--color-blue);
+            transition: all var(--transition-speed);
+            cursor: pointer;
+        }
+
+        .forum-category:hover {
+            background: var(--color-contrast-light);
+            transform: translateX(5px);
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .category-icon {
+            font-size: 2rem;
+            color: var(--color-blue);
+        }
+
+        .category-title {
+            font-size: 1.3rem;
             color: var(--color-text);
         }
-        .user-dropdown-menu ul li hr {
-            border: none; border-top: 1px solid var(--color-contrast-light);
-            margin: 5px 0;
+
+        .category-stats {
+            display: flex;
+            justify-content: space-between;
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
         }
-        #dropdown-logout-btn { color: var(--color-yellow); }
-        #dropdown-logout-btn:hover { color: var(--color-bg); background-color: var(--color-yellow) !important; }
-        nav ul li button#logout-btn { background-color: var(--color-yellow); color: var(--color-bg); font-weight: bold; } /* Botón original de logout, puede eliminarse si se prefiere solo el dropdown */
-        nav ul li button#logout-btn:hover { background-color: var(--color-text); color: var(--color-bg); }
 
+        /* Topic View */
+        .topic-view {
+            display: none;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
 
-        /* --- Estilos para las "PÁGINAS" y TRANSICIONES --- */
-        .page-content { display: none; opacity: 0; padding: 40px 0; min-height: 70vh; }
-        .page-content.active-page { display: block; animation: pageFadeIn var(--animation-duration) ease-out forwards; }
-        .page-content.exiting-page { animation: pageFadeOut var(--animation-duration) ease-in forwards; }
-        @keyframes pageFadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes pageFadeOut { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-20px); } }
+        .topic-header {
+            background: var(--color-contrast);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+        }
 
-        /* --- Sección Hero --- */
-        #hero { background-size: cover; background-position: center center; background-repeat: no-repeat; color: #fff; text-align: center; padding: 80px 20px 100px; min-height: auto; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; border-radius: 10px; margin-bottom: 40px; }
-        #hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0,0.1); border-radius: 10px;}
-        #hero h1 { font-size: clamp(2.5em, 5vw, 4.0em); margin-bottom: 20px; text-shadow: 0 0 15px rgba(29, 145, 247, 0.7), 0 0 20px rgba(29, 145, 247, 0.5); animation: none; opacity:1; transform: none;}
-        #hero p { font-size: clamp(1.1em, 2.5vw, 1.3em); margin-bottom: 30px; max-width: 600px; color: var(--color-text-muted); animation: none; opacity:1; transform: none;}
-        .hero-button { background: linear-gradient(45deg, var(--color-blue), var(--color-green)); color: var(--color-bg); border: none; padding: 18px 35px; font-size: 1.1em; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; border-radius: 50px; transition: all var(--transition-speed) ease; box-shadow: 0 5px 15px rgba(85, 251, 131, 0.3); animation: none; opacity:1; transform: none; }
-        .hero-button:hover, .hero-button:focus { transform: translateY(-5px) scale(1.05); box-shadow: 0 8px 25px rgba(29, 145, 247, 0.5); background: linear-gradient(45deg, var(--color-green), var(--color-blue)); }
+        .topic-title {
+            font-size: 2rem;
+            color: var(--color-text);
+            margin-bottom: 1rem;
+        }
 
-        /* --- Secciones de Contenido Genéricas (Noticias, etc.) --- */
-        .content-section { padding: 40px 0; }
-        .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 20px; }
-        .news-card { background-color: var(--color-contrast); border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.2); transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease; display: flex; flex-direction: column; }
-        .news-card:hover { transform: translateY(-10px); box-shadow: 0 10px 25px rgba(29, 145, 247, 0.3); }
-        .news-card-image { height: 200px; background-color: var(--color-contrast-light); display: flex; align-items: center; justify-content: center; color: var(--color-text-muted); font-size: 1.2em; }
-        .news-card-image img { width: 100%; height: 100%; object-fit: cover; }
-        .news-card-content { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
-        .news-card-content h3 { color: var(--color-yellow); font-size: 1.4em; }
-        .news-card-content p { color: var(--color-text-muted); font-size: 0.95em; margin-bottom: 15px; flex-grow: 1; }
-        .news-card-content small { display: block; color: var(--color-blue); margin-bottom: 20px; font-style: italic; }
-        .read-more-btn { display: inline-block; background-color: var(--color-blue); color: var(--color-contrast); padding: 10px 20px; border-radius: 5px; font-weight: bold; text-align: center; transition: background-color var(--transition-speed) ease; align-self: flex-start; cursor:pointer; }
-        .read-more-btn:hover { background-color: var(--color-green); color: var(--color-bg); }
-        
-        /* --- Estilos de Modales (General) --- */
-        .modal { display: none; position: fixed; z-index: 1001; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(18, 20, 22, 0.85); backdrop-filter: blur(5px); padding-top: 2%; opacity: 0; transition: opacity var(--transition-speed) ease-in-out; }
-        .modal.active { display: block; opacity: 1; }
-        .modal-content { background-color: var(--color-contrast); margin: 0 auto; padding: 35px 40px; border: 1px solid var(--color-contrast-light); width: 90%; max-width: 480px; border-radius: 12px; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.5); transform: scale(0.95); transition: transform var(--transition-speed) ease-in-out; }
-        .modal.active .modal-content { transform: scale(1); }
-        .close-btn { color: var(--color-text-muted); position: absolute; top: 15px; right: 20px; font-size: 32px; font-weight: bold; line-height: 1; transition: color var(--transition-speed) ease, transform 0.2s ease; cursor:pointer; }
-        .close-btn:hover, .close-btn:focus { color: var(--color-yellow); text-decoration: none; transform: rotate(90deg); }
-        .modal-content h3 { text-align: center; margin-bottom: 30px; color: var(--color-blue); font-size: 1.8em; font-weight: 700; }
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; margin-bottom: 8px; font-weight: 500; color: var(--color-text-muted); }
-        .modal-content input[type="email"], .modal-content input[type="password"], .modal-content input[type="text"] { width: 100%; padding: 14px 18px; border: 2px solid var(--color-contrast-light); background-color: var(--color-bg); color: var(--color-text); border-radius: 8px; font-size: 1em; transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease; }
-        .modal-content input:focus { outline: none; border-color: var(--color-blue); box-shadow: 0 0 0 3px rgba(29, 145, 247, 0.3); }
-        .modal-content button[type="submit"] { background: linear-gradient(45deg, var(--color-blue), var(--color-green)); color: var(--color-bg); font-weight: bold; padding: 15px 20px; border: none; border-radius: 8px; cursor: pointer; width: 100%; font-size: 1.1em; text-transform: uppercase; letter-spacing: 0.5px; transition: all var(--transition-speed) ease; box-shadow: 0 3px 10px rgba(85, 251, 131, 0.2); }
-        .modal-content button[type="submit"]:hover, .modal-content button[type="submit"]:focus { transform: translateY(-3px); box-shadow: 0 6px 15px rgba(29, 145, 247, 0.4); background: linear-gradient(45deg, var(--color-green), var(--color-blue)); }
-        .modal-content .form-footer { text-align: center; margin-top: 25px; font-size: 0.9em; color: var(--color-text-muted); }
-        .modal-content .form-footer a { color: var(--color-yellow); font-weight: bold; }
-        .modal-content .form-footer a:hover { color: var(--color-green); }
+        .topic-meta {
+            display: flex;
+            gap: 2rem;
+            color: var(--color-text-muted);
+        }
 
-        /* --- MODAL DETALLES DE NOTICIA --- */
-        #news-detail-modal .modal-content { max-width: 800px; }
-        .news-detail-image-container { width: 100%; height: 300px; margin-bottom: 20px; border-radius: 8px; overflow: hidden; background-color: var(--color-contrast-light); border: 2px solid var(--color-blue); box-shadow: 0 0 15px var(--color-blue); }
-        .news-detail-image-container img { width: 100%; height: 100%; object-fit: cover; }
-        .news-detail-text { margin-bottom: 25px; line-height: 1.8; color: var(--color-text-muted); }
-        .news-detail-actions { margin-bottom: 25px; display: flex; gap: 15px; }
-        .news-detail-actions button { background-color: var(--color-yellow); color: var(--color-bg); }
-        .news-detail-comments-section h4 { color: var(--color-green); margin-bottom: 15px; border-top: 1px solid var(--color-contrast-light); padding-top: 20px; }
-        .news-detail-comment { background-color: var(--color-bg); padding: 10px 15px; border-radius: 5px; margin-bottom: 10px; border-left: 3px solid var(--color-blue); }
-        .news-detail-comment strong { color: var(--color-yellow); }
-        .news-detail-comment small { color: var(--color-text-muted); font-size: 0.8em; display: block; }
-        .news-detail-comment-form textarea { width: 100%; padding: 10px; background-color: var(--color-bg); border: 1px solid var(--color-contrast-light); color: var(--color-text); border-radius: 5px; min-height: 80px; margin-bottom: 10px; }
-        .news-detail-comment-form button { display: block; margin-left: auto; }
-        .disabled-feature-notice { color: var(--color-yellow); font-style: italic; text-align: center; padding: 10px; background-color: rgba(252, 207, 58, 0.1); border-radius: 5px; }
+        .messages-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
 
-        /* --- NORMAS, ABOUT --- */
-        #about p, .rules-section p, .forum-section p, #page-profile p, #page-settings p { font-size: 1.1em; color: var(--color-text-muted); max-width: 800px; margin: 0 auto 20px; text-align: left; }
-        .rules-list { list-style: none; padding-left: 0; }
-        .rules-list li { background-color: var(--color-contrast); padding: 15px 20px; margin-bottom: 10px; border-radius: 8px; border-left: 5px solid var(--color-blue); box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .rules-list li strong { color: var(--color-green); }
-        
-        /* --- FORO --- */
-        .forum-view { display: none; }
-        .forum-view.active-forum-view { display: block; animation: pageFadeIn 0.3s ease-out forwards; }
-        .forum-categories-list, .forum-threads-list { list-style: none; padding-left: 0; }
-        .forum-categories-list li, .forum-threads-list li { background-color: var(--color-contrast); padding: 20px; margin-bottom: 15px; border-radius: 8px; border-left: 5px solid var(--color-blue); box-shadow: 0 3px 8px rgba(0,0,0,0.15); transition: transform 0.2s ease, box-shadow 0.2s ease; }
-        .forum-categories-list li:hover, .forum-threads-list li:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(29, 145, 247, 0.2); }
-        .forum-categories-list li a, .forum-threads-list li a { color: var(--color-yellow); font-size: 1.2em; text-decoration: none; }
-        .forum-categories-list li p, .forum-threads-list li p { font-size: 0.9em; margin-bottom: 0; color: var(--color-text-muted); }
-        .forum-threads-list li .thread-meta { font-size: 0.8em; color: var(--color-blue); margin-top: 5px; }
-        .forum-back-button { margin-bottom: 25px; background-color: var(--color-contrast-light); }
-        #forum-thread-view-content h3 { color: var(--color-green); margin-bottom: 20px; text-align: left;}
-        .thread-messages-container { max-height: 500px; overflow-y: auto; padding: 15px; background-color: var(--color-bg); border: 1px solid var(--color-contrast-light); border-radius: 8px; margin-bottom: 20px; }
-        .thread-message { padding: 10px 15px; border-radius: 8px; margin-bottom: 10px; border: 1px solid transparent; }
-        .thread-message.user-message { background-color: rgba(29, 145, 247, 0.15); border-left: 3px solid var(--color-blue); margin-left: 30px; }
-        .thread-message.other-message { background-color: rgba(85, 251, 131, 0.1); border-left: 3px solid var(--color-green); margin-right: 30px; }
-        .thread-message .message-author { font-weight: bold; color: var(--color-yellow); margin-bottom: 3px; }
-        .thread-message .message-timestamp { font-size: 0.75em; color: var(--color-text-muted); display: block; text-align: right; }
-        .thread-message-form textarea { width: 100%; padding: 12px; background-color: var(--color-contrast-light); border: 1px solid var(--color-contrast-light); color: var(--color-text); border-radius: 5px; min-height: 70px; margin-bottom: 10px; resize: vertical; }
-        .thread-message-form button { display: block; margin-left: auto; background-color: var(--color-green); color: var(--color-bg); }
-        .neon-effect-blue { box-shadow: 0 0 5px var(--color-blue), 0 0 10px var(--color-blue), 0 0 15px var(--color-blue); }
-        .neon-text-green { text-shadow: 0 0 5px var(--color-green), 0 0 10px var(--color-green); }
+        .message {
+            background: var(--color-contrast);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border-left: 3px solid var(--color-blue);
+        }
 
-        /* --- Footer --- */
-        footer { background-color: var(--color-contrast); color: var(--color-text-muted); text-align: center; padding: 50px 20px; border-top: 3px solid var(--color-blue); margin-top: 60px; }
-        footer p { margin-bottom: 15px; font-size: 0.95em; }
-        footer .social-links a { margin: 0 12px; color: var(--color-text-muted); font-size: 1.8em; transition: color var(--transition-speed) ease, transform 0.2s ease; display: inline-block; }
-        footer .social-links a:hover { color: var(--color-blue); transform: scale(1.2) rotate(5deg); }
-        .hidden { display: none !important; }
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
 
-        /* --- Responsividad --- */
+        .message-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--color-blue), var(--color-green));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .author-name {
+            color: var(--color-text);
+            font-weight: bold;
+        }
+
+        .message-time {
+            color: var(--color-text-muted);
+            font-size: 0.9rem;
+        }
+
+        .message-content {
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+
+        .message-actions {
+            margin-top: 1rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .message-action {
+            background: none;
+            border: none;
+            color: var(--color-text-muted);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 5px;
+            transition: all var(--transition-speed);
+        }
+
+        .message-action:hover {
+            background: var(--color-contrast-light);
+            color: var(--color-blue);
+        }
+
+        /* New Message Form */
+        .new-message-form {
+            background: var(--color-contrast);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--color-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: var(--color-contrast-light);
+            border: 2px solid transparent;
+            border-radius: 10px;
+            color: var(--color-text);
+            font-family: var(--font-primary);
+            transition: all var(--transition-speed);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--color-blue);
+            box-shadow: 0 0 0 3px rgba(29, 145, 247, 0.1);
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, var(--color-blue), var(--color-green));
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all var(--transition-speed);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(29, 145, 247, 0.3);
+        }
+
+        /* Rules Page */
+        .rules-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .rules-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .rules-header h1 {
+            font-size: 3rem;
+            color: var(--color-yellow);
+            margin-bottom: 1rem;
+        }
+
+        .rules-list {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .rule-category {
+            background: var(--color-contrast);
+            border-radius: 15px;
+            padding: 2rem;
+            border-left: 5px solid var(--color-yellow);
+        }
+
+        .rule-category h3 {
+            color: var(--color-yellow);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .rule-item {
+            background: var(--color-contrast-light);
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .rule-number {
+            color: var(--color-blue);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .rule-text {
+            margin-top: 0.5rem;
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+
+        /* Shop Page */
+        .shop-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .shop-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .shop-header h1 {
+            font-size: 3rem;
+            background: linear-gradient(45deg, var(--color-blue), var(--color-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        .shop-categories {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .category-filter {
+            background: var(--color-contrast);
+            border: 2px solid transparent;
+            color: var(--color-text);
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+        }
+
+        .category-filter:hover,
+        .category-filter.active {
+            background: var(--color-blue);
+            color: white;
+        }
+
+        .shop-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .shop-card {
+            background: var(--color-contrast);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all var(--transition-speed);
+            border: 2px solid transparent;
+        }
+
+        .shop-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--color-blue);
+            box-shadow: 0 10px 30px rgba(29, 145, 247, 0.3);
+        }
+
+        .shop-image {
+            height: 200px;
+            background: linear-gradient(45deg, var(--color-blue), var(--color-green));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .shop-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .shop-card:hover .shop-image::before {
+            left: 100%;
+        }
+
+        .shop-content {
+            padding: 2rem;
+        }
+
+        .shop-title {
+            font-size: 1.4rem;
+            color: var(--color-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .shop-description {
+            color: var(--color-text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .shop-price {
+            color: var(--color-green);
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+
+        .shop-button {
+            background: linear-gradient(45deg, var(--color-blue), var(--color-green));
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1.1rem;
+            transition: all var(--transition-speed);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .shop-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(29, 145, 247, 0.4);
+        }
+
+        /* Discord Page */
+        .discord-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .discord-widget {
+            background: var(--color-contrast);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .discord-icon {
+            font-size: 5rem;
+            color: #5865F2;
+            margin-bottom: 2rem;
+        }
+
+        .discord-widget h1 {
+            font-size: 2.5rem;
+            color: var(--color-text);
+            margin-bottom: 1rem;
+        }
+
+        .discord-widget p {
+            color: var(--color-text-muted);
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .discord-btn {
+            background: #5865F2;
+            color: white;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all var(--transition-speed);
+        }
+
+        .discord-btn:hover {
+            background: #4752C4;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(88, 101, 242, 0.4);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .slide-in {
+            animation: slideIn var(--animation-duration) ease-out;
+        }
+
+        /* Back button */
+        .back-btn {
+            background: var(--color-contrast);
+            color: var(--color-text);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-bottom: 2rem;
+            transition: all var(--transition-speed);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-btn:hover {
+            background: var(--color-blue);
+            color: white;
+        }
+
+        /* Responsive */
         @media (max-width: 768px) {
-            body { font-size: 15px; }
-            nav { flex-direction: column; align-items: center; }
-            nav .logo { margin-bottom: 15px; }
-            nav ul { margin-top: 10px; width: 100%; flex-direction: column; align-items: center; }
-            nav ul li { margin-left: 0; margin-bottom: 10px; width: 100%; /* Para que el user menu no se vea mal */ }
-            #user-info-nav { width: auto; margin: 0 auto; /* Centrar el botón de usuario si es el único visible */ }
-            .user-dropdown-menu { left: 50%; transform: translateX(-50%); min-width: 220px; /* Ajustar dropdown en móvil */ }
-            nav ul li a, nav ul li button.nav-button { display: block; text-align: center; width: 80%; margin: 0 auto; }
-            #hero { padding: 60px 15px 80px; }
-            .news-grid { grid-template-columns: 1fr; }
-            .modal-content { width: 95%; padding: 25px; }
-            #news-detail-modal .modal-content { padding: 20px; }
-            .thread-message.user-message { margin-left: 10px; }
-            .thread-message.other-message { margin-right: 10px; }
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--color-contrast);
+                flex-direction: column;
+                padding: 1rem;
+                border-radius: 0 0 15px 15px;
+            }
+
+            .nav-menu.show {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+
+            .forum-categories {
+                grid-template-columns: 1fr;
+            }
+
+            .shop-items {
+                grid-template-columns: 1fr;
+            }
+
+            .topic-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .message-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--color-contrast);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--color-blue);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--color-green);
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-city"></i>
+                Vespucci RP
+            </a>
             <nav>
-                <div class="logo">Samp<span>Proyect</span></div>
-                <ul>
-                    <li><a href="#page-inicio" class="nav-page-link active-link">Inicio</a></li>
-                    <li><a href="#page-foro" class="nav-page-link">Foro</a></li>
-                    <li><a href="#page-normas" class="nav-page-link">Normas</a></li>
-                    <li id="login-li"><button type="button" id="login-btn" class="nav-button">Login</button></li>
-                    <li id="register-li"><button type="button" id="register-btn" class="nav-button">Registro</button></li>
-                    
-                    <li id="user-info-nav" class="hidden">
-                        <div id="user-menu-button" class="user-menu-button" aria-haspopup="true" aria-expanded="false">
-                            <span id="user-icon-display">👤</span>
-                            <span id="user-info"></span>
-                            <span id="dropdown-arrow">▼</span>
-                        </div>
-                        <div id="user-dropdown-menu" class="user-dropdown-menu" role="menu">
-                            <ul>
-                                <li role="none"><a href="#page-profile" role="menuitem" class="dropdown-page-link">Ver Perfil</a></li>
-                                <li role="none"><a href="#page-settings" role="menuitem" class="dropdown-page-link">Configurar Cuenta</a></li>
-                                <li role="none"><hr></li>
-                                <li role="none"><button type="button" id="dropdown-logout-btn" role="menuitem">Cerrar Sesión</button></li>
-                            </ul>
-                        </div>
-                    </li>
-                    </ul>
+                <ul class="nav-menu" id="navMenu">
+                    <li><button onclick="showPage('home')" class="nav-btn active" data-page="home">
+                        <i class="fas fa-home"></i> Inicio
+                    </button></li>
+                    <li><button onclick="showPage('forum')" class="nav-btn" data-page="forum">
+                        <i class="fas fa-comments"></i> Foro
+                    </button></li>
+                    <li><button onclick="showPage('rules')" class="nav-btn" data-page="rules">
+                        <i class="fas fa-gavel"></i> Normas
+                    </button></li>
+                    <li><button onclick="showPage('shop')" class="nav-btn" data-page="shop">
+                        <i class="fas fa-shopping-cart"></i> Tienda
+                    </button></li>
+                    <li><button onclick="showPage('discord')" class="nav-btn" data-page="discord">
+                        <i class="fab fa-discord"></i> Discord
+                    </button></li>
+                </ul>
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
             </nav>
         </div>
     </header>
 
-    <main>
-        <div id="page-inicio" class="page-content active-page">
-            <section id="hero">
-                 <h1>Tu Destino Roleplay Definitivo</h1>
-                <p>Sumérgete en un mundo de posibilidades infinitas, forja tu historia y conviértete en leyenda. ¡La aventura te espera!</p>
-                <button class="hero-button">Únete a la Aventura</button>
+    <!-- Content Container -->
+    <div class="content-container">
+        <!-- Home Page -->
+        <div id="home" class="page active">
+            <section class="hero">
+                <div class="hero-content">
+                    <h1><i class="fas fa-city"></i> Vespucci Roleplay</h1>
+                    <p class="subtitle">El servidor de roleplay más auténtico de San Andreas</p>
+                    <p>Vive la experiencia de roleplay más realista en Los Santos. Únete a nuestra comunidad y crea tu propia historia en las calles más peligrosas de San Andreas.</p>
+                    <div class="cta-buttons">
+                        <a href="#" class="cta-button">
+                            <i class="fas fa-play"></i> ¡Conectar Ahora!
+                        </a>
+                        <a href="#" class="cta-button secondary">
+                            <i class="fas fa-info-circle"></i> Más Información
+                        </a>
+                    </div>
+                </div>
             </section>
-            <div class="container">
-                <section id="news" class="content-section">
-                    <h2 id="news-title">Últimas Novedades</h2>
-                    <div class="news-grid"></div>
-                </section>
-                <section id="about" class="content-section">
-                    <h2>¿Quiénes Somos?</h2>
-                    <p>En <strong>SampProyect</strong>, nos dedicamos a crear la experiencia de Roleplay más inmersiva y dinámica...</p>
-                </section>
-            </div>
+
+            <section class="stats">
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-users"></i></div>
+                        <div class="stat-number">247</div>
+                        <div class="stat-label">Jugadores Online</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-user-friends"></i></div>
+                        <div class="stat-number">1,250</div>
+                        <div class="stat-label">Miembros Registrados</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-server"></i></div>
+                        <div class="stat-number">50</div>
+                        <div class="stat-label">Slots Máximos</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                        <div class="stat-number">24/7</div>
+                        <div class="stat-label">Servidor Activo</div>
+                    </div>
+                </div>
+            </section>
         </div>
 
-        <div id="page-foro" class="page-content">
-            <div class="container">
-                <div id="forum-categories-view" class="forum-view active-forum-view">
-                    <section class="forum-section content-section">
-                        <h2>Foros de la Comunidad</h2>
-                        <p>¡Bienvenido a nuestros foros! Aquí puedes discutir sobre el servidor, compartir ideas, reportar problemas o simplemente charlar con otros jugadores.</p>
-                        <ul id="forum-categories-list-container" class="forum-categories-list"></ul>
-                    </section>
+        <!-- Forum Page -->
+        <div id="forum" class="page">
+            <div class="forum-container">
+                <div class="forum-header">
+                    <h1><i class="fas fa-comments"></i> Foro de la Comunidad</h1>
+                    <p>Conecta con otros jugadores, comparte experiencias y mantente al día con las últimas noticias</p>
                 </div>
-                <div id="forum-threads-view" class="forum-view">
-                    <button id="forum-back-to-categories" class="forum-back-button button-style">« Volver a Categorías</button>
-                    <h2 id="forum-category-title"></h2>
-                    <ul id="forum-threads-list-container" class="forum-threads-list"></ul>
-                    <div class="disabled-feature-notice">La creación de nuevos hilos aún no está implementada.</div>
+
+                <div id="forumCategories" class="forum-categories">
+                    <div class="forum-category" onclick="showTopic('announcements')">
+                        <div class="category-header">
+                            <i class="fas fa-bullhorn category-icon"></i>
+                            <h3 class="category-title">Anuncios Oficiales</h3>
+                        </div>
+                        <p>Noticias importantes del servidor y actualizaciones</p>
+                        <div class="category-stats">
+                            <span><i class="fas fa-comment"></i> 45 temas</span>
+                            <span><i class="fas fa-eye"></i> 1,250 vistas</span>
+                        </div>
+                    </div>
+
+                    <div class="forum-category" onclick="showTopic('general')">
+                        <div class="category-header">
+                            <i class="fas fa-comment-dots category-icon"></i>
+                            <h3 class="category-title">Charla General</h3>
+                        </div>
+                        <p>Conversaciones generales sobre el servidor y roleplay</p>
+                        <div class="category-stats">
+                            <span><i class="fas fa-comment"></i> 156 temas</span>
+                            <span><i class="fas fa-eye"></i> 3,420 vistas</span>
+                        </div>
+                    </div>
+
+                    <div class="forum-category" onclick="showTopic('marketplace')">
+                        <div class="category-header">
+                            <i class="fas fa-store category-icon"></i>
+                            <h3 class="category-title">Mercado</h3>
+                        </div>
+                        <p>Compra y venta de vehículos, propiedades y más</p>
+                        <div class="category-stats">
+                            <span><i class="fas fa-comment"></i> 89 temas</span>
+                            <span><i class="fas fa-eye"></i> 2,180 vistas</span>
+                        </div>
+                    </div>
+
+                    <div class="forum-category" onclick="showTopic('support')">
+                        <div class="category-header">
+                            <i class="fas fa-life-ring category-icon"></i>
+                            <h3 class="category-title">Soporte Técnico</h3>
+                        </div>
+                        <p>Reporta bugs, problemas técnicos o solicita ayuda</p>
+                        <div class="category-stats">
+                            <span><i class="fas fa-comment"></i> 67 temas</span>
+                            <span><i class="fas fa-eye"></i> 890 vistas</span>
+                        </div>
+                    </div>
+
+                    <div class="forum-category" onclick="showTopic('events')">
+                        <div class="category-header">
+                            <i class="fas fa-calendar-alt category-icon"></i>
+                            <h3 class="category-title">Eventos</h3>
+                        </div>
+                        <p>Eventos programados y actividades especiales</p>
+                        <div class="category-stats">
+                            <span><i class="fas fa-comment"></i> 23 temas</span>
+                            <span><i class="fas fa-eye"></i> 1,560 vistas</span>
+                        </div>
+                    </div>
+
+                    <div class="forum-category" onclick="showTopic('jobs')">
+                        <div class="category-header">
+                            <i class="fas fa-briefcase category-icon"></i>
+                            <h3 class="category-title">Trabajos</h3>
+                        </div>
+                        <p>Ofertas de trabajo y reclutamiento de organizaciones</p>
+                        <div class="category-stats">
+                            <span><i class="fas fa-comment"></i> 34 temas</span>
+                            <span><i class="fas fa-eye"></i> 780 vistas</span>
+                        </div>
+                    </div>
                 </div>
-                <div id="forum-thread-view" class="forum-view">
-                    <button id="forum-back-to-threads" class="forum-back-button button-style">« Volver a Hilos</button>
-                    <div id="forum-thread-view-content">
-                        <h3 id="forum-thread-title"></h3>
-                        <div class="thread-messages-container" id="thread-messages-container"></div>
-                        <form id="thread-message-form" class="thread-message-form">
-                            <textarea id="thread-new-message-text" placeholder="Escribe tu mensaje aquí..."></textarea>
-                            <button type="submit">Enviar Mensaje</button>
-                            <div class="disabled-feature-notice" id="forum-send-message-notice" style="margin-top:10px;">La función de enviar mensajes aún no está terminada.</div>
+
+                <!-- Topic View (Hidden by default) -->
+                <div id="topicView" class="topic-view">
+                    <button class="back-btn" onclick="showForumCategories()">
+                        <i class="fas fa-arrow-left"></i> Volver al Foro
+                    </button>
+
+                    <div class="topic-header">
+                        <h2 class="topic-title" id="topicTitle">Cargando...</h2>
+                        <div class="topic-meta">
+                            <span><i class="fas fa-user"></i> Creado por: <strong id="topicAuthor">Admin</strong></span>
+                            <span><i class="fas fa-clock"></i> <span id="topicDate">Hace 2 horas</span></span>
+                            <span><i class="fas fa-eye"></i> <span id="topicViews">150</span> vistas</span>
+                        </div>
+                    </div>
+
+                    <div class="messages-container" id="messagesContainer">
+                        <!-- Messages will be loaded here -->
+                    </div>
+
+                    <div class="new-message-form">
+                        <h3><i class="fas fa-reply"></i> Responder al tema</h3>
+                        <form onsubmit="submitMessage(event)">
+                            <div class="form-group">
+                                <label for="messageContent">Tu respuesta:</label>
+                                <textarea id="messageContent" rows="5" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">
+                                <i class="fas fa-paper-plane"></i> Publicar Respuesta
+                            </button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div id="page-normas" class="page-content">
-             <div class="container">
-                <section class="rules-section content-section">
-                    <h2>Normativas del Servidor</h2>
-                    <p>Para garantizar una experiencia de juego justa, divertida y respetuosa para todos los miembros de nuestra comunidad, es crucial que conozcas y sigas nuestras normativas...</p>
-                    <h3>Reglas Generales</h3> <ul class="rules-list"> <li><strong>Respeto:</strong> Trata a todos los jugadores y miembros del staff con respeto...</li><li><strong>Cheats/Hacks:</strong> El uso de cualquier tipo de programa externo...</li><li><strong>Multicuentas:</strong> No se permiten multicuentas...</li><li><strong>Publicidad:</strong> Prohibida la publicidad...</li> </ul>
-                    <h3>Reglas de Roleplay (Ejemplos)</h3> <ul class="rules-list"> <li><strong>PG (Powergaming):</strong> Realizar acciones que serían imposibles...</li><li><strong>MG (Metagaming):</strong> Utilizar información OOC...</li><li><strong>DM (Deathmatch):</strong> Matar sin motivo de rol...</li><li><strong>CK (Character Kill):</strong> Asesinato permanente...</li><li><strong>NVVPJ (No Valorar la Vida del Personaje):</strong> No actuar de forma realista...</li> </ul>
-                    <p style="margin-top: 20px;">Estas son solo algunas de las normativas principales...</p>
-                </section>
+        <!-- Rules Page -->
+        <div id="rules" class="page">
+            <div class="rules-container">
+                <div class="rules-header">
+                    <h1><i class="fas fa-gavel"></i> Normas del Servidor</h1>
+                    <p>Lee y respeta estas reglas para mantener una experiencia de juego positiva para todos</p>
+                </div>
+
+                <div class="rules-list">
+                    <div class="rule-category">
+                        <h3><i class="fas fa-handshake"></i> Comportamiento General</h3>
+                        <div class="rule-item">
+                            <div class="rule-number">Regla #1</div>
+                            <div class="rule-text">Respetar a todos los jugadores y administradores. No se tolerará ningún tipo de discriminación, acoso, comportamiento tóxico o spam en el chat.</div>
+                        </div>
+                        <div class="rule-item">
+                            <div class="rule-number">Regla #2</div>
+                            <div class="rule-text">Mantener un lenguaje apropiado. Evitar insultos excesivos, lenguaje vulgar dirigido a otros jugadores o comentarios ofensivos.</div>
+                        </div>
+                        <div class="rule-item">
+                            <div class="rule-number">Regla #3</div>
+                            <div class="rule-text">No hacer publicidad de otros servidores, páginas web, redes sociales o servicios no relacionados con Vespucci RP.</div>
+                        </div>
+                    </div>
+
+                    <div class="rule-category">
+                        <h3><i class="fas fa-theater-masks"></i> Roleplay</h3>
+                        <div class="rule-item">
+                            <div class="rule-number">Regla #4</div>
+                            <div class="rule-text">Mantener el roleplay en todo momento. No romper el personaje (IC) salvo en situaciones administrativas (OOC) debidamente señalizadas.</div>
+                        </div>
+                        <div class="rule-item">
+                            <div class="rule-number">Regla #5</div>
+                            <div class="rule-text">Crear un personaje realista con trasfondo coherente. Evitar nombres irreales, ofensivos o que rompan la inmersión del roleplay.</div>
+                        </div>
+                        <div class="rule-item">
+                            <div class="rule-number">Regla #6</div>
+                            <div class="rule-text">El MetaGaming está prohibido. No usar información obtenida fuera del juego (Discord, foros, etc.) dentro del roleplay.</div>
+                        </div>
+                        <div class="rule-item">
+                            <div class="rule-number">Regla #7</div>
+                            <div class="rule-text">El PowerGaming está prohibido. No forzar acciones sobre otros jugadores sin darles posibilidad de respuesta o reacción.</div>
+                        </div>
+                    </div>
+
+                    <div class="rule-category">
+                        <h3><i class="fas fa-fist-raised"></i> Combate y PvP</h3>
+                        <div class="rule-item">
+                            <div class="rule-number">Regla #8</div>
+                            <div class="rule-text">Prohibido el Random Deathmatch (RDM). Siempre debe haber una razón roleplay válida y desarrollada antes de atacar a otro jugador.</div>
+                        </div>
+                        <div class="rule-item">
+                            <div class="rule-number">Regla #9</div>
+                            <div class="rule-text">Prohibido el Vehicle Deathmatch (VDM). No usar vehículos como armas para atropellar intencionalmente a otros jugadores sin motivo RP.</div>
+                        </div>
+                        <div class="rule-item">
+                            <div class="rule-number">Regla #10</div>
+                            <div class="rule-text">Respetar las situaciones de Fear RP. Si tu personaje está en desventaja evidente, debe actuar con miedo y realismo.</div>
+                        </div>
+                    </div>
+
+                    <div class="rule-category">
+                        <h3><i class="fas fa-shield-alt"></i> Zonas y Ubicaciones</h3>
+                        <div class="rule-item">
+                            <div class="rule-number">Regla #11</div>
+                            <div class="rule-text">Respetar las zonas seguras como hospitales, comisarías y spawn points. No realizar actividades criminales en estas áreas.</div>
+                        </div>
+                        <div class="rule-item">
+                            <div class="rule-number">Regla #12</div>
+                            <div class="rule-text">No camping en zonas de spawn o áreas de trabajo. Permitir que otros jugadores utilicen los espacios públicos libremente.</div>
+                        </div>
+                    </div>
+
+                    <div class="rule-category">
+                        <h3><i class="fas fa-cog"></i> Aspectos Técnicos</h3>
+                        <div class="rule-item">
+                            <div class="rule-number">Regla #13</div>
+                            <div class="rule-text">Prohibido el uso de hacks, cheats, mods no autorizados o cualquier software que otorgue ventajas injustas sobre otros jugadores.</div>
+                        </div>
+                        <div class="rule-item">
+                            <div class="rule-number">Regla #14</div>
+                            <div class="rule-text">No explotar bugs del juego o del servidor. Reportar cualquier error encontrado a la administración inmediatamente.</div>
+                        </div>
+                        <div class="rule-item">
+                            <div class="rule-number">Regla #15</div>
+                            <div class="rule-text">Una cuenta por jugador. No crear múltiples cuentas para obtener ventajas económicas o de otro tipo.</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div id="page-profile" class="page-content">
-            <div class="container">
-                <section class="content-section">
-                    <h2>Perfil de Usuario</h2>
-                    <p class="disabled-feature-notice">Esta sección estará disponible próximamente. Aquí podrás ver y editar los detalles de tu perfil.</p>
-                    <button onclick="switchPage('page-inicio')" class="button-style" style="margin-top:20px;">Volver a Inicio</button>
-                </section>
+        <!-- Shop Page -->
+        <div id="shop" class="page">
+            <div class="shop-container">
+                <div class="shop-header">
+                    <h1><i class="fas fa-shopping-cart"></i> Tienda Virtual</h1>
+                    <p>Mejora tu experiencia de juego con nuestros paquetes y productos exclusivos</p>
+                </div>
+
+                <div class="shop-categories">
+                    <button class="category-filter active" onclick="filterShop('all')">
+                        <i class="fas fa-th"></i> Todo
+                    </button>
+                    <button class="category-filter" onclick="filterShop('money')">
+                        <i class="fas fa-dollar-sign"></i> Dinero
+                    </button>
+                    <button class="category-filter" onclick="filterShop('vehicles')">
+                        <i class="fas fa-car"></i> Vehículos
+                    </button>
+                    <button class="category-filter" onclick="filterShop('properties')">
+                        <i class="fas fa-home"></i> Propiedades
+                    </button>
+                    <button class="category-filter" onclick="filterShop('vip')">
+                        <i class="fas fa-crown"></i> VIP
+                    </button>
+                </div>
+
+                <div class="shop-items" id="shopItems">
+                    <div class="shop-card" data-category="money">
+                        <div class="shop-image">
+                            <i class="fas fa-coins"></i>
+                        </div>
+                        <div class="shop-content">
+                            <div class="shop-title">Paquete Básico</div>
+                            <div class="shop-description">$50,000 en dinero del juego para empezar tu aventura en Los Santos con buen pie</div>
+                            <div class="shop-price">$2.99</div>
+                            <button class="shop-button" onclick="purchaseItem('basic-money')">
+                                <i class="fas fa-shopping-cart"></i> Comprar
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="shop-card" data-category="money">
+                        <div class="shop-image">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                        <div class="shop-content">
+                            <div class="shop-title">Paquete Premium</div>
+                            <div class="shop-description">$200,000 en dinero del juego + bonificación del 10% extra por tiempo limitado</div>
+                            <div class="shop-price">$9.99</div>
+                            <button class="shop-button" onclick="purchaseItem('premium-money')">
+                                <i class="fas fa-shopping-cart"></i> Comprar
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="shop-card" data-category="vehicles">
+                        <div class="shop-image">
+                            <i class="fas fa-car-side"></i>
+                        </div>
+                        <div class="shop-content">
+                            <div class="shop-title">Vehículo Deportivo</div>
+                            <div class="shop-description">Acceso exclusivo a una colección de autos deportivos de lujo y alta gama</div>
+                            <div class="shop-price">$12.99</div>
+                            <button class="shop-button" onclick="purchaseItem('sports-car')">
+                                <i class="fas fa-shopping-cart"></i> Comprar
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="shop-card" data-category="vehicles">
+                        <div class="shop-image">
+                            <i class="fas fa-motorcycle"></i>
+                        </div>
+                        <div class="shop-content">
+                            <div class="shop-title">Motocicleta Custom</div>
+                            <div class="shop-description">Una moto personalizada con modificaciones únicas y colores exclusivos</div>
+                            <div class="shop-price">$7.99</div>
+                            <button class="shop-button" onclick="purchaseItem('custom-bike')">
+                                <i class="fas fa-shopping-cart"></i> Comprar
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="shop-card" data-category="properties">
+                        <div class="shop-image">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div class="shop-content">
+                            <div class="shop-title">Apartamento de Lujo</div>
+                            <div class="shop-description">Un elegante apartamento en el centro de Los Santos con vistas espectaculares</div>
+                            <div class="shop-price">$24.99</div>
+                            <button class="shop-button" onclick="purchaseItem('luxury-apartment')">
+                                <i class="fas fa-shopping-cart"></i> Comprar
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="shop-card" data-category="properties">
+                        <div class="shop-image">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <div class="shop-content">
+                            <div class="shop-title">Mansión en las Colinas</div>
+                            <div class="shop-description">Una impresionante mansión completamente amueblada en las colinas de Vinewood</div>
+                            <div class="shop-price">$49.99</div>
+                            <button class="shop-button" onclick="purchaseItem('mansion')">
+                                <i class="fas fa-shopping-cart"></i> Comprar
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="shop-card" data-category="vip">
+                        <div class="shop-image">
+                            <i class="fas fa-gem"></i>
+                        </div>
+                        <div class="shop-content">
+                            <div class="shop-title">VIP Gold (30 días)</div>
+                            <div class="shop-description">Acceso VIP premium con beneficios exclusivos, colores especiales y comandos únicos</div>
+                            <div class="shop-price">$19.99</div>
+                            <button class="shop-button" onclick="purchaseItem('vip-gold')">
+                                <i class="fas fa-shopping-cart"></i> Comprar
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="shop-card" data-category="vip">
+                        <div class="shop-image">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <div class="shop-content">
+                            <div class="shop-title">VIP Diamond (90 días)</div>
+                            <div class="shop-description">El máximo nivel VIP con todos los beneficios, spawn especial y prioridad en el servidor</div>
+                            <div class="shop-price">$49.99</div>
+                            <button class="shop-button" onclick="purchaseItem('vip-diamond')">
+                                <i class="fas fa-shopping-cart"></i> Comprar
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div id="page-settings" class="page-content">
-            <div class="container">
-                <section class="content-section">
-                    <h2>Configuración de Cuenta</h2>
-                    <p class="disabled-feature-notice">Esta sección estará disponible próximamente. Aquí podrás ajustar las configuraciones de tu cuenta.</p>
-                    <button onclick="switchPage('page-inicio')" class="button-style" style="margin-top:20px;">Volver a Inicio</button>
-                </section>
+        <!-- Discord Page -->
+        <div id="discord" class="page">
+            <div class="discord-container">
+                <div class="discord-widget">
+                    <div class="discord-icon">
+                        <i class="fab fa-discord"></i>
+                    </div>
+                    <h1>Únete a nuestro Discord</h1>
+                    <p>Conecta con la comunidad, mantente informado sobre eventos, recibe soporte técnico y socializa con otros jugadores de Vespucci Roleplay.</p>
+                    <a href="#" class="discord-btn">
+                        <i class="fab fa-discord"></i> Unirse al Discord
+                    </a>
+                </div>
+
+                <div class="stats">
+                    <div class="stats-container">
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-users"></i></div>
+                            <div class="stat-number">850</div>
+                            <div class="stat-label">Miembros en Discord</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-comments"></i></div>
+                            <div class="stat-number">12</div>
+                            <div class="stat-label">Canales Activos</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-microphone"></i></div>
+                            <div class="stat-number">45</div>
+                            <div class="stat-label">En Canales de Voz</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon"><i class="fas fa-headset"></i></div>
+                            <div class="stat-number">24/7</div>
+                            <div class="stat-label">Soporte Disponible</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </main>
-
-    <div id="news-detail-modal" class="modal">
-        <div class="modal-content"> <span class="close-btn" data-modal-id="news-detail-modal">×</span> <h3 id="news-detail-title">Detalle de la Noticia</h3> <div class="news-detail-image-container"> <img id="news-detail-large-image" src="" alt="Imagen de la noticia en detalle"> </div> <div id="news-detail-text" class="news-detail-text"></div> <div id="news-detail-actions" class="news-detail-actions"></div> <div class="news-detail-comments-section"> <h4>Comentarios</h4> <div id="news-detail-comments-list"></div> <form id="news-detail-comment-form" class="news-detail-comment-form"> <textarea id="news-detail-new-comment" placeholder="Escribe tu comentario... (Función no implementada)"></textarea> <button type="submit">Comentar</button> <div class="disabled-feature-notice" style="margin-top:10px;">La función de enviar comentarios aún no está terminada.</div> </form> </div> </div>
     </div>
-
-    <div id="login-modal" class="modal">
-        <div class="modal-content"> <span class="close-btn" data-modal-id="login-modal">×</span> <h3>Iniciar Sesión</h3> <form id="login-form"> <div class="form-group"><label for="login-email">Correo</label><input type="email" id="login-email" placeholder="tu@correo.com" required></div> <div class="form-group"><label for="login-password">Contraseña</label><input type="password" id="login-password" placeholder="••••••••" required></div> <button type="submit">Entrar Ahora</button> </form> <div class="form-footer">¿No tienes cuenta? <a href="#" id="show-register-from-login">Regístrate</a></div> </div>
-    </div>
-    <div id="register-modal" class="modal">
-        <div class="modal-content"> <span class="close-btn" data-modal-id="register-modal">×</span> <h3>Crear Cuenta</h3> <form id="register-form"> <div class="form-group"><label for="register-username">Usuario (PJ)</label><input type="text" id="register-username" placeholder="TuNombreEnElJuego" required></div> <div class="form-group"><label for="register-email">Correo</label><input type="email" id="register-email" placeholder="tu@correo.com" required></div> <div class="form-group"><label for="register-password">Contraseña</label><input type="password" id="register-password" placeholder="Mínimo 6 caracteres" required></div> <button type="submit">Crear Cuenta</button> </form> <div class="form-footer">¿Ya tienes cuenta? <a href="#" id="show-login-from-register">Inicia Sesión</a></div> </div>
-    </div>
-
-    <footer>
-        <div class="container"> <p>© 2025 SampProyect. Diseñado con <span style="color: var(--color-green);">❤</span> por la Comunidad.</p> <div class="social-links"></div> </div>
-    </footer>
-
-    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
 
     <script>
-        // --- CONFIGURACIÓN DE CONTENIDO DINÁMICO ---
-        const siteConfig = {
-            heroBackgroundImage: 'utils/hero_background.jpg', 
-            newsItems: [ /* ... (igual que antes) ... */ ],
-            forumCategories: [ /* ... (igual que antes) ... */ ],
-            sampleThreadMessages: { /* ... (igual que antes) ... */ },
-            socialLinks: { discord: "https://discord.gg/https://discord.gg/su8TUSfwHQ", forum: "#page-foro", youtube: "https://youtube.com/vespucci-rp", twitter: "https://twitter.com/TU_PERFIL" }
-        };
-         // (Copia aquí el contenido de siteConfig.newsItems, forumCategories, y sampleThreadMessages de la respuesta anterior si es necesario, para brevedad lo omito aquí)
-        siteConfig.newsItems = [
-            { id: "news-1", title: "Sistema de Desconocidos", date: "PRÓXIMAMENTE", summary: "Conoce gente...", image: "des/crew.jpeg", largeImage: "des/crew.jpeg", fullText: "Texto completo...", detailButtons: [{ label: "Discutir en Foro", action: "navigateToForumCategory('sugerencias')" }], exampleComments: [] },
-            { id: "news-2", title: "Sistema de Logros", date: "PRÓXIMAMENTE", summary: "Gana descubriendo...", image: "des/logros.png", largeImage: "des/logros.png", fullText: "Texto completo...", detailButtons: [], exampleComments: [] },
-            { id: "news-3", title: "Nuevas Normativas", date: "22 MAY, 2025", summary: "Actualizamos normativas...", image: "des/sony.png", largeImage: "des/reglasnormativas.png", fullText: "Texto completo...", detailButtons: [ { label: "Ir a Normas", action: "switchToPageById('page-normas')" } ], exampleComments: [] }
-        ];
-        siteConfig.forumCategories = [
-            { id: "anuncios-oficiales", name: "Anuncios Oficiales", description: "Novedades importantes.", threads: [{ id: "thread-an-1", title: "Mantenimiento 25 Mayo", author: "Admin", replies: 2, lastPost: "Hace 5 min" }]},
-            { id: "discusion-general", name: "Discusión General", description: "Temas del servidor.", threads: [{ id: "thread-dg-1", title: "¿Trabajo favorito?", author: "Curioso", replies: 32, lastPost: "Ahora" }]},
-        ];
-        siteConfig.sampleThreadMessages = {
-            "thread-an-1": [{ author: "Admin", text: "Mantenimiento de 03:00 a 04:00 AM.", timestamp: "Hace 1 hora", type: "other"}],
-            "thread-dg-1": [{ author: "Curioso", text: "¿Cuál es su trabajo favorito?", timestamp: "Hace 1 día", type: "other"}],
-        };
-
-
-        // --- INICIO DEL SCRIPT DE APP.JS ---
-        const firebaseConfig = {
-            apiKey: "AIzaSyCAj3iwCBSGGS3Xi7kwvW8-MfBZjHi3r1g",
-            authDomain: "vespucci-web.firebaseapp.com",
-            projectId: "vespucci-web",
-            storageBucket: "vespucci-web.firebasestorage.app",
-            messagingSenderId: "599783398367",
-            appId: "1:599783398367:web:b8fc1b6f3cc0c3afdf826a",
-            measurementId: "G-RP5VPPLGEH"
-        };
-        try { if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); } } catch (e) { console.error("Error Firebase (revisa credenciales):", e); }
-        const auth = firebase.auth();
-        const db = firebase.firestore();
-
-        const loginLi = document.getElementById('login-li');
-        const registerLi = document.getElementById('register-li');
-        const userInfoNav = document.getElementById('user-info-nav');
-        const userInfoDisplay = document.getElementById('user-info');
-        const userMenuButton = document.getElementById('user-menu-button');
-        const userDropdownMenu = document.getElementById('user-dropdown-menu');
-        const dropdownLogoutBtn = document.getElementById('dropdown-logout-btn');
-
-        const loginModalEl = document.getElementById('login-modal');
-        const registerModalEl = document.getElementById('register-modal');
-        const newsDetailModalEl = document.getElementById('news-detail-modal');
-        const closeButtons = document.querySelectorAll('.close-btn');
-        const loginForm = document.getElementById('login-form');
-        const registerForm = document.getElementById('register-form');
-        const showRegisterFromLogin = document.getElementById('show-register-from-login');
-        const showLoginFromRegister = document.getElementById('show-login-from-register');
-        const newsDetailCommentForm = document.getElementById('news-detail-comment-form');
-        const threadMessageForm = document.getElementById('thread-message-form');
-
-        const navPageLinks = document.querySelectorAll('.nav-page-link');
-        const pageContents = document.querySelectorAll('.page-content');
-        let currentActivePageId = 'page-inicio'; 
-
-        function switchPage(targetPageId, skipScroll = false) {
-            const newPage = document.getElementById(targetPageId);
-            const currentPage = document.getElementById(currentActivePageId);
-            if (!newPage || (newPage === currentPage && (skipScroll || window.scrollY === 0))) return;
-            if (newPage === currentPage && !skipScroll) { window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
-
-            // Quitar 'active-link' de los links de navegación principales
-            navPageLinks.forEach(link => link.classList.remove('active-link'));
-            // Añadir 'active-link' solo si es un link de navegación principal
-            const mainNavLink = Array.from(navPageLinks).find(link => link.getAttribute('href') === `#${targetPageId}`);
-            if (mainNavLink) mainNavLink.classList.add('active-link');
+        // Enhanced navigation with page history
+        let pageHistory = ['home'];
+        
+        function showPage(pageId) {
+            // Add to history if not going back
+            if (pageHistory[pageHistory.length - 1] !== pageId) {
+                pageHistory.push(pageId);
+            }
             
-            closeUserDropdown(); // Cerrar dropdown si está abierto al cambiar de página
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update navigation
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-page="${pageId}"]`).classList.add('active');
+            
+            // Hide mobile menu if open
+            document.getElementById('navMenu').classList.remove('show');
+        }
 
-            const showNewPageAfterExit = () => {
-                newPage.style.display = 'block'; 
-                requestAnimationFrame(() => newPage.classList.add('active-page'));
-                currentActivePageId = targetPageId;
-                if (!skipScroll) window.scrollTo({ top: 0, behavior: 'smooth' });
-                if (targetPageId === 'page-foro') showForumView('forum-categories-view');
-            };
-
-            if (currentPage && currentPage !== newPage) {
-                currentPage.classList.remove('active-page'); 
-                currentPage.classList.add('exiting-page');   
-                currentPage.addEventListener('animationend', function onExit() {
-                    currentPage.style.display = 'none'; 
-                    currentPage.classList.remove('exiting-page');
-                    currentPage.removeEventListener('animationend', onExit);
-                    showNewPageAfterExit();
-                }, { once: true });
-            } else {
-                showNewPageAfterExit();
+        // Add CSS for particle animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes float {
+                0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.6; }
+                50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
             }
-        }
-        function switchToPageById(pageId) { switchPage(pageId); }
-
-        navPageLinks.forEach(link => {
-            link.addEventListener('click', (e) => { e.preventDefault(); switchPage(link.getAttribute('href').substring(1)); });
-        });
-        
-        function openModal(modal) { if (modal) modal.classList.add('active'); }
-        function closeModal(modal) { if (modal) modal.classList.remove('active'); }
-        if (document.getElementById('login-btn')) document.getElementById('login-btn').addEventListener('click', (e) => { e.preventDefault(); openModal(loginModalEl); });
-        if (document.getElementById('register-btn')) document.getElementById('register-btn').addEventListener('click', (e) => { e.preventDefault(); openModal(registerModalEl); });
-        closeButtons.forEach(btn => { btn.addEventListener('click', () => { closeModal(document.getElementById(btn.getAttribute('data-modal-id'))); }); });
-        window.addEventListener('click', (event) => { if (event.target.classList.contains('modal')) closeModal(event.target); });
-        window.addEventListener('keydown', (event) => { if (event.key === 'Escape') { document.querySelectorAll('.modal.active').forEach(closeModal); }});
-        if (showRegisterFromLogin) { showRegisterFromLogin.addEventListener('click', (e) => { e.preventDefault(); closeModal(loginModalEl); openModal(registerModalEl); }); }
-        if (showLoginFromRegister) { showLoginFromRegister.addEventListener('click', (e) => { e.preventDefault(); closeModal(registerModalEl); openModal(loginModalEl); }); }
-
-        // --- USER DROPDOWN MENU ---
-        function toggleUserDropdown() {
-            userDropdownMenu.classList.toggle('active');
-            userMenuButton.classList.toggle('open');
-            userMenuButton.setAttribute('aria-expanded', userDropdownMenu.classList.contains('active'));
-        }
-        function closeUserDropdown() {
-            userDropdownMenu.classList.remove('active');
-            userMenuButton.classList.remove('open');
-            userMenuButton.setAttribute('aria-expanded', 'false');
-        }
-        if (userMenuButton) {
-            userMenuButton.addEventListener('click', (e) => {
-                e.stopPropagation(); // Evitar que el clic en el botón cierre inmediatamente el menú (por el listener global)
-                toggleUserDropdown();
-            });
-        }
-        // Cerrar dropdown si se hace clic fuera
-        window.addEventListener('click', (e) => {
-            if (userDropdownMenu.classList.contains('active') && !userMenuButton.contains(e.target) && !userDropdownMenu.contains(e.target)) {
-                closeUserDropdown();
+            
+            @keyframes pulse {
+                0% { transform: scale(1); }
+                50% { transform: scale(1.05); }
+                100% { transform: scale(1); }
             }
-        });
-        // Cerrar dropdown con tecla Escape
-        window.addEventListener('keydown', (event) => {
-            if (event.key === 'Escape' && userDropdownMenu.classList.contains('active')) {
-                closeUserDropdown();
+            
+            .stat-card:hover {
+                animation: pulse 0.6s ease-in-out;
             }
-        });
-        // Manejar clics en los items del dropdown que son links de página
-        document.querySelectorAll('.dropdown-page-link').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const targetPageId = link.getAttribute('href').substring(1);
-                switchPage(targetPageId);
-                closeUserDropdown(); 
-            });
-        });
-        if(dropdownLogoutBtn) {
-            dropdownLogoutBtn.addEventListener('click', () => {
-                if (!firebase.apps.length || !auth) { alert("Error: Firebase no configurado."); return; }
-                auth.signOut().catch(err => alert("Error logout: " + err.message));
-                closeUserDropdown(); 
-            });
-        }
+            
+            .shop-card:hover .shop-image i {
+                animation: pulse 0.8s ease-in-out infinite;
+            }
+            
+            .message {
+                opacity: 0;
+                animation: slideInMessage 0.5s ease-out forwards;
+            }
+            
+            @keyframes slideInMessage {
+                from {
+                    opacity: 0;
+                    transform: translateX(-30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+            
+            .topic-view {
+                opacity: 0;
+                animation: fadeIn 0.3s ease-out forwards;
+            }
+            
+            .page {
+                opacity: 0;
+                animation: pageTransition 0.4s ease-out forwards;
+            }
+            
+            @keyframes pageTransition {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            .nav-btn {
+                position: relative;
+                overflow: hidden;
+            }
+            
+            .nav-btn::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+                transition: left 0.5s;
+            }
+            
+            .nav-btn:hover::before {
+                left: 100%;
+            }
+            
+            /* Loading animation for stats */
+            .stat-number {
+                overflow: hidden;
+            }
+            
+            .stat-number.animate {
+                animation: countUp 2s ease-out;
+            }
+            
+            @keyframes countUp {
+                from { transform: translateY(100%); }
+                to { transform: translateY(0); }
+            }
+            
+            /* Glowing effect for VIP items */
+            .shop-card[data-category="vip"] {
+                position: relative;
+            }
+            
+            .shop-card[data-category="vip"]::before {
+                content: '';
+                position: absolute;
+                top: -2px;
+                left: -2px;
+                right: -2px;
+                bottom: -2px;
+                background: linear-gradient(45deg, var(--color-yellow), var(--color-blue), var(--color-green), var(--color-yellow));
+                border-radius: 22px;
+                z-index: -1;
+                opacity: 0;
+                transition: opacity 0.3s;
+                animation: rotate 3s linear infinite;
+            }
+            
+            .shop-card[data-category="vip"]:hover::before {
+                opacity: 1;
+            }
+            
+            @keyframes rotate {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+            
+            /* Forum category hover effects */
+            .forum-category::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 4px;
+                height: 0;
+                background: var(--color-green);
+                transition: height 0.3s ease;
+            }
+            
+            .forum-category {
+                position: relative;
+            }
+            
+            .forum-category:hover::before {
+                height: 100%;
+            }
+            
+            /* Custom scrollbar for messages */
+            .messages-container {
+                max-height: 600px;
+                overflow-y: auto;
+                padding-right: 10px;
+            }
+            
+            .messages-container::-webkit-scrollbar {
+                width: 6px;
+            }
+            
+            .messages-container::-webkit-scrollbar-thumb {
+                background: var(--color-blue);
+                border-radius: 3px;
+            }
+            
+            /* Notification toast styles */
+            .toast {
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: var(--color-contrast);
+                color: var(--color-text);
+                padding: 1rem 1.5rem;
+                border-radius: 10px;
+                border-left: 4px solid var(--color-green);
+                box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+                z-index: 2000;
+                transform: translateX(400px);
+                transition: transform 0.3s ease;
+            }
+            
+            .toast.show {
+                transform: translateX(0);
+            }
+            
+            /* Improved mobile responsive */
+            @media (max-width: 480px) {
+                .hero-content h1 {
+                    font-size: 2rem;
+                }
+                
+                .cta-button {
+                    padding: 0.75rem 1.5rem;
+                    font-size: 1rem;
+                }
+                
+                .shop-items {
+                    grid-template-columns: 1fr;
+                    padding: 0 1rem;
+                }
+                
+                .forum-categories {
+                    padding: 0 1rem;
+                }
+                
+                .nav-container {
+                    padding: 0 1rem;
+                }
+            }
+        `;
+        document.head.appendChild(style);
 
-
-        // --- DETALLES DE NOTICIA (Modal) ---
-        // (Sin cambios respecto a la anterior, se asume que está bien)
-        function showNewsDetail(newsId) { /* ... (código de la respuesta anterior) ... */ }
-        if (newsDetailCommentForm) { newsDetailCommentForm.addEventListener('submit', (e) => {e.preventDefault(); alert('Comentarios no implementados aún.');});}
-        function showNewsDetail(newsId) {
-            const newsItem = siteConfig.newsItems.find(item => item.id === newsId);
-            if (!newsItem) return;
-            document.getElementById('news-detail-title').textContent = newsItem.title;
-            document.getElementById('news-detail-large-image').src = newsItem.largeImage || newsItem.image;
-            document.getElementById('news-detail-text').innerHTML = (newsItem.fullText || "").replace(/\n/g, '<br>');
-            const actionsContainer = document.getElementById('news-detail-actions');
-            actionsContainer.innerHTML = '';
-            if (newsItem.detailButtons) newsItem.detailButtons.forEach(btnData => { /* ... */ });
-            const commentsList = document.getElementById('news-detail-comments-list');
-            commentsList.innerHTML = '';
-            if (newsItem.exampleComments && newsItem.exampleComments.length) newsItem.exampleComments.forEach(comment => { /* ... */ }); else commentsList.innerHTML = '<p>No hay comentarios.</p>';
-            openModal(newsDetailModalEl);
-        }
-
-        // --- FUNCIONALIDAD DEL FORO (Simulada) ---
-        // (Sin cambios principales respecto a la anterior, se asume que está bien)
-        const forumCategoriesView = document.getElementById('forum-categories-view');
-        const forumThreadsView = document.getElementById('forum-threads-view');
-        const forumThreadView = document.getElementById('forum-thread-view');
-        function showForumView(viewId) { /* ... */ }
-        function populateForumCategories() { /* ... */ }
-        function navigateToForumCategory(categoryId) { /* ... */ }
-        function showForumCategory(categoryId) { /* ... */ }
-        function showForumThread(threadId) { /* ... */ }
-        if(document.getElementById('forum-back-to-categories')) document.getElementById('forum-back-to-categories').addEventListener('click', () => showForumView('forum-categories-view'));
-        if(document.getElementById('forum-back-to-threads')) document.getElementById('forum-back-to-threads').addEventListener('click', () => { /* ... */ });
-        if(threadMessageForm) { threadMessageForm.addEventListener('submit', (e) => {e.preventDefault(); document.getElementById('forum-send-message-notice').textContent = "Envío no implementado.";}); }
-
-
-        // --- DOMContentLoaded ---
-        document.addEventListener('DOMContentLoaded', () => {
-            const heroSection = document.getElementById('hero');
-            if (heroSection && siteConfig.heroBackgroundImage) heroSection.style.backgroundImage = `linear-gradient(rgba(18,20,22,0.85), rgba(18,20,22,0.95)), url('${siteConfig.heroBackgroundImage}')`;
-            const newsGrid = document.querySelector('#page-inicio #news .news-grid');
-            if (newsGrid && siteConfig.newsItems && siteConfig.newsItems.length > 0) { /* ... (código de la respuesta anterior para news) ... */ }
-            else if (newsGrid) { document.getElementById('news-title').textContent="Próximamente"; newsGrid.innerHTML = '<p>No hay noticias.</p>';}
-            const socialLinksContainer = document.querySelector('footer .social-links');
-            if (socialLinksContainer && siteConfig.socialLinks) { /* ... (código de la respuesta anterior para social links) ... */ }
-
-            pageContents.forEach(page => { /* ... (código de la respuesta anterior para page setup) ... */ });
-            if (window.location.hash) { /* ... (código de la respuesta anterior para hash navigation) ... */ }
-            populateForumCategories(); // Asegúrate que esta función esté definida
-        });
-         // Rellenar noticias
-        const newsGrid = document.querySelector('#page-inicio #news .news-grid');
-        if (newsGrid && siteConfig.newsItems && siteConfig.newsItems.length > 0) {
-            newsGrid.innerHTML = ''; 
-            siteConfig.newsItems.forEach(item => {
-                const newsCardHTML = `<article class="news-card" data-news-id="${item.id}"><div class="news-card-image"><img src="${item.image}" alt="${item.title}"></div><div class="news-card-content"><h3>${item.title}</h3><small>Fecha: ${item.date}</small><p>${item.summary}</p><button type="button" class="read-more-btn">Leer Más »</button></div></article>`;
-                newsGrid.insertAdjacentHTML('beforeend', newsCardHTML);
-            });
-            newsGrid.querySelectorAll('.read-more-btn').forEach(btn => btn.addEventListener('click', (e) => showNewsDetail(e.target.closest('.news-card').dataset.newsId)));
-        }
-        // Rellenar links sociales
-        const socialLinksContainer = document.querySelector('footer .social-links');
-        if (socialLinksContainer && siteConfig.socialLinks) {
-            socialLinksContainer.innerHTML = `<a href="${siteConfig.socialLinks.discord}" title="Discord" target="_blank">👾</a> <a href="${siteConfig.socialLinks.forum}" title="Foro" id="footer-forum-link">📚</a> <a href="${siteConfig.socialLinks.youtube}" title="YouTube" target="_blank">▶️</a> <a href="${siteConfig.socialLinks.twitter}" title="Twitter/X" target="_blank">🐦</a>`;
-            document.getElementById('footer-forum-link').addEventListener('click', (e) => {e.preventDefault(); switchPage('page-foro');});
-        }
-         // Cargar contenido del foro
-        function populateForumCategories() {
-            const container = document.getElementById('forum-categories-list-container');
-            if (!container || !siteConfig.forumCategories) return;
-            container.innerHTML = '';
-            siteConfig.forumCategories.forEach(cat => {
-                const listItem = document.createElement('li');
-                listItem.innerHTML = `<h4><a href="#" data-category-id="${cat.id}">${cat.name}</a></h4><p>${cat.description}</p>`;
-                listItem.querySelector('a').addEventListener('click', (e) => { e.preventDefault(); navigateToForumCategory(cat.id); });
-                container.appendChild(listItem);
-            });
-        }
-        // (Re-define las funciones del foro showForumView, navigateToForumCategory, showForumCategory, showForumThread de la respuesta anterior aquí para que estén disponibles)
-        let currentForumCategory = null;
-        function showForumView(viewId) { [forumCategoriesView, forumThreadsView, forumThreadView].forEach(v => v.classList.remove('active-forum-view')); document.getElementById(viewId)?.classList.add('active-forum-view');}
-        function navigateToForumCategory(categoryId) { if(currentActivePageId !== 'page-foro') switchPage('page-foro', true); setTimeout(()=>showForumCategory(categoryId), currentActivePageId !== 'page-foro' ? 500:0);}
-        function showForumCategory(categoryId) { currentForumCategory = siteConfig.forumCategories.find(c=>c.id===categoryId); if(!currentForumCategory)return; document.getElementById('forum-category-title').textContent=currentForumCategory.name; const listEl = document.getElementById('forum-threads-list-container'); listEl.innerHTML=''; if(currentForumCategory.threads?.length){currentForumCategory.threads.forEach(t=>{const li=document.createElement('li');li.innerHTML=`<h4><a href="#" data-thread-id="${t.id}">${t.title}</a></h4><p class="thread-meta">Por: ${t.author} | Respuestas: ${t.replies} | Último: ${t.lastPost}</p>`;li.querySelector('a').addEventListener('click',e=>{e.preventDefault();showForumThread(t.id)});listEl.appendChild(li)})}else{listEl.innerHTML='<li><p>No hay hilos.</p></li>'} showForumView('forum-threads-view');}
-        function showForumThread(threadId) { const threadData = currentForumCategory?.threads.find(t=>t.id===threadId);const messages=siteConfig.sampleThreadMessages[threadId]||[];document.getElementById('forum-thread-title').textContent=threadData?.title||"Hilo";const msgContainer=document.getElementById('thread-messages-container');msgContainer.innerHTML='';if(messages.length){messages.forEach(m=>{const div=document.createElement('div');div.className=`thread-message ${m.type==='user'?'user-message':'other-message'}`;div.innerHTML=`<div class="message-author">${m.author}</div><div class="message-text">${m.text}</div><div class="message-timestamp">${m.timestamp}</div>`;msgContainer.appendChild(div)})}else{msgContainer.innerHTML='<p>No hay mensajes.</p>'}msgContainer.scrollTop=msgContainer.scrollHeight;showForumView('forum-thread-view');}
-
-
-        // --- Lógica de Autenticación ---
-        if (registerForm) {
-            registerForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const email = registerForm['register-email'].value, pass = registerForm['register-password'].value, userPJ = registerForm['register-username'].value;
-                if (!email || !pass || !userPJ) { alert("Completa todos los campos."); return; }
-                if (pass.length < 6) { alert("Contraseña: mín. 6 caracteres."); return; }
-                if (!firebase.apps.length || !auth) { alert("Error: Firebase no configurado."); return; }
-                auth.createUserWithEmailAndPassword(email, pass)
-                    .then(cred => db.collection('users').doc(cred.user.uid).set({ email: cred.user.email, samp_username: userPJ, createdAt: firebase.firestore.FieldValue.serverTimestamp() }))
-                    .then(() => { alert("¡Registro exitoso!"); registerForm.reset(); closeModal(registerModalEl); /* onAuthStateChanged se encargará de la UI */ })
-                    .catch(err => alert("Error registro: " + err.message));
-            });
-        }
-        if (loginForm) {
-            loginForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const email = loginForm['login-email'].value, pass = loginForm['login-password'].value;
-                if (!email || !pass) { alert("Ingresa correo y contraseña."); return; }
-                if (!firebase.apps.length || !auth) { alert("Error: Firebase no configurado."); return; }
-                auth.signInWithEmailAndPassword(email, pass)
-                    .then(() => { loginForm.reset(); closeModal(loginModalEl); /* onAuthStateChanged se encargará de la UI */ })
-                    .catch(err => alert("Error login: " + err.message));
-            });
-        }
-        
-        if (firebase.apps.length && auth) {
-            auth.onAuthStateChanged(async user => {
-                if (user) {
-                    loginLi.classList.add('hidden');
-                    registerLi.classList.add('hidden');
-                    userInfoNav.classList.remove('hidden');
-                    // document.getElementById('logout-li')?.classList.remove('hidden'); // Si aún usas el botón de logout principal
-                    try { 
-                        const doc = await db.collection('users').doc(user.uid).get(); 
-                        const pjName = doc.exists ? (doc.data().samp_username || user.email.split('@')[0]) : user.email.split('@')[0];
-                        userInfoDisplay.textContent = pjName;
-                    } 
-                    catch (err) { console.error("Error Firestore:", err); userInfoDisplay.textContent = user.email.split('@')[0]; }
-                } else { 
-                    loginLi.classList.remove('hidden');
-                    registerLi.classList.remove('hidden');
-                    userInfoNav.classList.add('hidden');
-                    // document.getElementById('logout-li')?.classList.add('hidden');
-                    userInfoDisplay.textContent = '';
-                    closeUserDropdown(); // Asegurarse que el dropdown esté cerrado al hacer logout
+        // Shop functions
+        function filterShop(category) {
+            const items = document.querySelectorAll('.shop-card');
+            const filters = document.querySelectorAll('.category-filter');
+            
+            // Update filter buttons
+            filters.forEach(filter => filter.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Show/hide items
+            items.forEach(item => {
+                if (category === 'all' || item.dataset.category === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
                 }
             });
-        } else { console.warn("Firebase no inicializado. Autenticación no funcionará."); }
+        }
+
+        function purchaseItem(itemId) {
+            alert(`¡Compra iniciada para ${itemId}! Serás redirigido al sistema de pago.`);
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            showPage('home');
+        });
     </script>
 </body>
-</html>
+</html> Sample forum data
+        const forumData = {
+            announcements: {
+                title: "📢 Anuncios Oficiales",
+                author: "Admin",
+                date: "Hace 2 horas",
+                views: 150,
+                messages: [
+                    {
+                        author: "Admin",
+                        avatar: "A",
+                        time: "Hace 2h",
+                        content: "¡Bienvenidos a la nueva actualización de Vespucci Roleplay! Hemos implementado nuevas características y mejoras significativas."
+                    },
+                    {
+                        author: "Moderador",
+                        avatar: "M",
+                        time: "Hace 1h",
+                        content: "Recordad leer las nuevas normas actualizadas. Hemos añadido algunas reglas importantes sobre el roleplay."
+                    }
+                ]
+            },
+            general: {
+                title: "💬 Charla General",
+                author: "PlayerOne",
+                date: "Hace 30 minutos",
+                views: 89,
+                messages: [
+                    {
+                        author: "PlayerOne",
+                        avatar: "P",
+                        time: "Hace 30m",
+                        content: "¿Alguien sabe dónde puedo conseguir un trabajo como mecánico en el servidor?"
+                    },
+                    {
+                        author: "MechanicPro",
+                        avatar: "M",
+                        time: "Hace 25m",
+                        content: "Ve al taller de Burton, allí están reclutando. ¡Buena suerte!"
+                    },
+                    {
+                        author: "PlayerOne",
+                        avatar: "P",
+                        time: "Hace 20m",
+                        content: "¡Gracias por la información! Me dirijo para allá ahora mismo."
+                    }
+                ]
+            },
+            marketplace: {
+                title: "🏪 Mercado",
+                author: "CarDealer",
+                date: "Hace 1 hora",
+                views: 234,
+                messages: [
+                    {
+                        author: "CarDealer",
+                        avatar: "C",
+                        time: "Hace 1h",
+                        content: "Vendo Infernus modificado, color rojo, precio: $250,000. Contactar por MP."
+                    },
+                    {
+                        author: "RichPlayer",
+                        avatar: "R",
+                        time: "Hace 45m",
+                        content: "Me interesa el Infernus. ¿Qué modificaciones tiene exactamente?"
+                    }
+                ]
+            },
+            support: {
+                title: "🆘 Soporte Técnico",
+                author: "TechUser",
+                date: "Hace 3 horas",
+                views: 45,
+                messages: [
+                    {
+                        author: "TechUser",
+                        avatar: "T",
+                        time: "Hace 3h",
+                        content: "Tengo problemas para conectarme al servidor, me aparece 'connection failed'."
+                    },
+                    {
+                        author: "Admin",
+                        avatar: "A",
+                        time: "Hace 2h",
+                        content: "Hola, verifica que tengas la IP correcta: vespucci-rp.com:7777. Si persiste, contacta por Discord."
+                    }
+                ]
+            },
+            events: {
+                title: "🎉 Eventos",
+                author: "EventManager",
+                date: "Hace 4 horas",
+                views: 178,
+                messages: [
+                    {
+                        author: "EventManager",
+                        avatar: "E",
+                        time: "Hace 4h",
+                        content: "¡Este sábado gran evento de carreras! Premios en efectivo para los 3 primeros lugares."
+                    },
+                    {
+                        author: "RacerGirl",
+                        avatar: "R",
+                        time: "Hace 3h",
+                        content: "¡Genial! ¿A qué hora será el evento? No me lo quiero perder."
+                    }
+                ]
+            },
+            jobs: {
+                title: "💼 Trabajos",
+                author: "PoliceChief",
+                date: "Hace 6 horas",
+                views: 92,
+                messages: [
+                    {
+                        author: "PoliceChief",
+                        avatar: "P",
+                        time: "Hace 6h",
+                        content: "La LSPD está reclutando nuevos oficiales. Requisitos: nivel 5+, buen roleplay, sin antecedentes."
+                    },
+                    {
+                        author: "NewbieCop",
+                        avatar: "N",
+                        time: "Hace 5h",
+                        content: "¿Hay algún proceso de selección específico o puedo aplicar directamente?"
+                    }
+                ]
+            }
+        };
+
+        // Navigation functions
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update navigation
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-page="${pageId}"]`).classList.add('active');
+            
+            // Hide mobile menu if open
+            document.getElementById('navMenu').classList.remove('show');
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('navMenu').classList.toggle('show');
+        }
+
+        // Forum functions
+        function showTopic(topicId) {
+            const topic = forumData[topicId];
+            if (!topic) return;
+
+            document.getElementById('forumCategories').style.display = 'none';
+            document.getElementById('topicView').style.display = 'block';
+            
+            // Update topic info
+            document.getElementById('topicTitle').textContent = topic.title;
+            document.getElementById('topicAuthor').textContent = topic.author;
+            document.getElementById('topicDate').textContent = topic.date;
+            document.getElementById('topicViews').textContent = topic.views;
+            
+            // Load messages
+            const messagesContainer = document.getElementById('messagesContainer');
+            messagesContainer.innerHTML = '';
+            
+            topic.messages.forEach(message => {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message slide-in';
+                messageDiv.innerHTML = `
+                    <div class="message-header">
+                        <div class="message-author">
+                            <div class="author-avatar">${message.avatar}</div>
+                            <span class="author-name">${message.author}</span>
+                        </div>
+                        <span class="message-time">${message.time}</span>
+                    </div>
+                    <div class="message-content">${message.content}</div>
+                    <div class="message-actions">
+                        <button class="message-action" onclick="likeMessage(this)">
+                            <i class="fas fa-thumbs-up"></i> Me gusta
+                        </button>
+                        <button class="message-action" onclick="replyToMessage(this)">
+                            <i class="fas fa-reply"></i> Responder
+                        </button>
+                        <button class="message-action" onclick="reportMessage(this)">
+                            <i class="fas fa-flag"></i> Reportar
+                        </button>
+                    </div>
+                `;
+                messagesContainer.appendChild(messageDiv);
+            });
+        }
+
+        function showForumCategories() {
+            document.getElementById('forumCategories').style.display = 'grid';
+            document.getElementById('topicView').style.display = 'none';
+        }
+
+        function submitMessage(event) {
+            event.preventDefault();
+            const messageContent = document.getElementById('messageContent').value;
+            if (!messageContent.trim()) return;
+
+            const messagesContainer = document.getElementById('messagesContainer');
+            const newMessage = document.createElement('div');
+            newMessage.className = 'message slide-in';
+            newMessage.innerHTML = `
+                <div class="message-header">
+                    <div class="message-author">
+                        <div class="author-avatar">U</div>
+                        <span class="author-name">Usuario</span>
+                    </div>
+                    <span class="message-time">Ahora</span>
+                </div>
+                <div class="message-content">${messageContent}</div>
+                <div class="message-actions">
+                    <button class="message-action" onclick="likeMessage(this)">
+                        <i class="fas fa-thumbs-up"></i> Me gusta
+                    </button>
+                    <button class="message-action" onclick="replyToMessage(this)">
+                        <i class="fas fa-reply"></i> Responder
+                    </button>
+                    <button class="message-action" onclick="reportMessage(this)">
+                        <i class="fas fa-flag"></i> Reportar
+                    </button>
+                </div>
+            `;
+            
+            messagesContainer.appendChild(newMessage);
+            document.getElementById('messageContent').value = '';
+            
+            // Scroll to new message
+            newMessage.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function likeMessage(button) {
+            button.style.color = 'var(--color-blue)';
+            button.innerHTML = '<i class="fas fa-thumbs-up"></i> Te gusta';
+        }
+
+        function replyToMessage(button) {
+            const messageContent = button.closest('.message').querySelector('.message-content').textContent;
+            const textarea = document.getElementById('messageContent');
+            textarea.value = `> ${messageContent}\n\n`;
+            textarea.focus();
+        }
+
+        function reportMessage(button) {
+            alert('Mensaje reportado a los moderadores. Gracias por mantener la comunidad segura.');
+        }
+
+        // Shop functions
+        function filterShop(category) {
+            const items = document.querySelectorAll('.shop-card');
+            const filters = document.querySelectorAll('.category-filter');
+            
+            // Update filter buttons
+            filters.forEach(filter => filter.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Show/hide items
+            items.forEach(item => {
+                if (category === 'all' || item.dataset.category === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        function purchaseItem(itemId) {
+            alert(`¡Compra iniciada para ${itemId}! Serás redirigido al sistema de pago.`);
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            showPage('home');
+        });
+
+        //
